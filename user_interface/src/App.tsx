@@ -1,21 +1,21 @@
 import {useLayoutEffect, useEffect, useState } from 'react';
 import axios from 'axios';
 import {Telefonu_page, DregmeDiv, PapildomaDiv, TemperaturosDiv, VejasDiv, Saule_logo, Lietus_logo, Dregna_logo, Vejas_logo, Naktis_logo, Main_page } from './Temperaturosdivas'
-
 import {Routes, Route, Navigate } from 'react-router-dom'
 
 function App(){
-  const [weatherData, setWeatherData] = useState({"ID":7.1500062,"REMOTE_ID":0,"AMBIENT_TEMPERATURE":7.1500062,"GROUND_TEMPERATURE":0,"AIR_QUALITY":0,"AIR_PRESSURE":1400,"HUMIDITY":500,"WIND_DIRECTION":0,"WIND_SPEED":69,"WIND_GUST_SPEED":32,"RAINFALL":0,"CREATED":"1970-01-01T00:00:00.000Z"})
+
+  const [weatherData, setWeatherData] = useState({"ID":0,"REMOTE_ID":0,"AMBIENT_TEMPERATURE":0,"GROUND_TEMPERATURE":0,"AIR_QUALITY":0,"AIR_PRESSURE":0,"HUMIDITY":0,"WIND_DIRECTION":0,"WIND_SPEED":0,"WIND_GUST_SPEED":0,"RAINFALL":0,"CREATED":"1970-01-01T00:00:00.000Z"})
   const [logo, switchlogo] = useState(0)
   var today = new Date();
   var time = today.getHours();
+  // console.log(weatherData)
+
 
   function get_latest_data(){
-    axios.get('/latest_data').then(function (response) {
-      console.log(response.data[0]);
+    axios.get('http://localhost:5000/latest_data').then(function(response) {
       const wData = response.data[0]
       setWeatherData(wData)
-      changeLogo()
     })
     .catch(function (error) {
       console.log(error);
@@ -33,8 +33,7 @@ function App(){
       }
       if(weatherData.WIND_SPEED>=9*3.6){
         switchlogo(2)
-      }
-    }
+      }    }
     else if (time < 6 || time > 20)
     {
       if(weatherData.WIND_SPEED < 10){
@@ -46,7 +45,6 @@ function App(){
     }
   }
   function isMobile(a:number){
-    console.log(a)
     if (a <700&&window.location.pathname =="/"){
       window.location.replace("/mobile");   
     }
@@ -75,6 +73,9 @@ function App(){
     isMobile(size[0])
   }, [size]);
 
+  useEffect(()=>{
+    changeLogo()
+  }, [weatherData])
 
   setInterval(function(){
     get_latest_data()

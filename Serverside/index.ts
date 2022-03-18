@@ -1,6 +1,8 @@
+
 var all_data_api = require("./all_data_api.ts")
 var latest_data = require("./latest_data_api.ts")
 
+const path = require('path')
 const mariadb = require('mariadb');
 const express = require('express')
 const cors = require('cors')
@@ -23,3 +25,9 @@ latest_data.latest_data(app, pool)
 app.listen(port, function(){
     console.log(`Example app listening on port ${port}!`)
 });
+
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+  

@@ -88,7 +88,7 @@ export function PapildomaDiv(weatherData: { AIR_PRESSURE: number; HUMIDITY: numb
         <p className='oro-kokybe'>DREGMĖ</p>
         <p className='oro-slegis-skaicius'>{(weatherData.AIR_PRESSURE).toFixed(1)}hPa</p> 
         <p className='max-greitis-skaicius'>{(weatherData.WIND_GUST_SPEED/3.6).toFixed(1)}m/s</p> 
-        <p className='dregme-skaicius'>{(weatherData.HUMIDITY).toFixed(0)}%</p> 
+        <p className='dregme-skaicius'>{(weatherData.HUMIDITY).toFixed(1)}%</p> 
       </div>
       </div>
   )
@@ -203,7 +203,7 @@ export function Telefonu_page(weatherData:{ f:number; AMBIENT_TEMPERATURE: numbe
                     <p className='tekstas-telefono-informacijai'>DREGMĖ</p>
                   </td>
                   <td>
-                   <p className='tekstas-telefono-informacijai'>{(weatherData.HUMIDITY).toFixed(0)}%</p> 
+                   <p className='tekstas-telefono-informacijai'>{(weatherData.HUMIDITY).toFixed(1)}%</p> 
                   </td>
                 </tr>
               </tbody>
