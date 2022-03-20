@@ -10,10 +10,10 @@ function App(){
   var today = new Date();
   var time = today.getHours();
   // console.log(weatherData)
-
+  var link = 'http://192.168.56.229:5000/latest_data'
 
   function get_latest_data(){
-    axios.get('http://localhost:5000/latest_data').then(function(response) {
+    axios.get(link).then(function(response) {
       const wData = response.data[0]
       setWeatherData(wData)
     })
